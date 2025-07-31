@@ -41,7 +41,28 @@ public class Teste {
             
             switch (opcao) {
                 case 1:
-                    
+                        for (int i = achaVagoPasseio(); i < vetVeiculoPasseio.length; i++) {
+                            if (i == -1) {
+                                leitura.entDados("\nVetor de PASSEIO está cheio! press <ENTER>");
+                                break;
+                            }
+                            
+                            veiculoPasseio = new Passeio();
+                            vetVeiculoPasseio[i] = cadastraVeiculoPasseio(veiculoPasseio);
+                            
+                            leitura.entDados("\nVeículo de PASSEIO armazenado na posição " + i + " do vetor - press <ENTER>");
+                            
+                            String respPasseio = leitura.entDados("\nDeseja cadastrar outro veículo de PASSEIO? <s/n>");
+                            
+                            if (respPasseio.equalsIgnoreCase("n")) {
+                                break;
+                            }
+                            
+                            if (achaVagoPasseio() == -1) {
+                                leitura.entDados("\nVetor de PASSEIO está cheio! press <ENTER>");
+                                break;
+                            }
+                        }
                     break;
                     
                 case 2:
@@ -57,6 +78,40 @@ public class Teste {
             }
         }
         
+    }
+    
+    public static int achaVagoPasseio() {
+        for (int i = 0; i < vetVeiculoPasseio.length; i++) {
+            if (vetVeiculoPasseio[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public static int achaVagoCarga() {
+        for (int i = 0; i < vetVeiculoCarga.length; i++) {
+            if (vetVeiculoCarga[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public static Passeio cadastraVeiculoPasseio(Passeio veiculoPasseio) {
+        System.out.println("\n==============================");
+        System.out.println("Cadastro de veículo de PASSEIO");
+        System.out.println("==============================");
+        veiculoPasseio.setCor(leitura.entDados("Cor......................:"));
+        veiculoPasseio.setMarca(leitura.entDados("Marca..................:"));
+        veiculoPasseio.setModelo(leitura.entDados("Modelo................:"));
+        veiculoPasseio.setPlaca(leitura.entDados("Placa..................:"));
+        veiculoPasseio.setQtdRodas(Integer.parseInt(leitura.entDados("Qtdade de rodas................:")));
+        veiculoPasseio.setVelocMax(Float.parseFloat(leitura.entDados("Veloc. Máx.....................:")));
+        veiculoPasseio.setQtdPassageiros(Integer.parseInt(leitura.entDados("Qtdade de passageiros....:")));
+        veiculoPasseio.getMotor().setPotencia(Integer.parseInt(leitura.entDados("Potencia do motor...:")));
+        veiculoPasseio.getMotor().setQtdPist(Integer.parseInt(leitura.entDados("Qtdade de pistão do motor.......:")));
+        return veiculoPasseio;
     }
     
 }
